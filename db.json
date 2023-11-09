@@ -1,0 +1,57 @@
+{
+ "data":[
+  {"item":"Rice",
+  "price":100,
+  "quant":1,
+  "id":1
+},
+{"item":"Biriyani",
+  "price":150,
+  "quant":1,
+  "id":2
+},
+{"item":"Chicken",
+  "price":120,
+  "quant":1,
+  "id":3
+},
+{"item":"Fried rice",
+  "price":130,
+  "quant":1,
+  "id":4
+},
+{"item":"Porota",
+  "price":10,
+  "quant":1,
+  "id":5
+},
+{"item":"Chappathi",
+  "price":8,
+  "quant":1,
+  "id":6
+},
+{"item":"Dosa",
+  "price":7,
+  "quant":1,
+  "id":7
+},
+{"item":"Juice",
+  "price":50,
+  "quant":1,
+  "id":8
+},
+{"item":"Cake",
+  "price":20,
+  "quant":1,
+  "id":9
+},
+{"item":"Shake",
+  "price":80,
+  "quant":1,
+  "id":10
+}
+
+ ]  
+
+
+}
