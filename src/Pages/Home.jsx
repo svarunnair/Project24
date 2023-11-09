@@ -68,7 +68,7 @@ export default function Home() {
     navigate('/signin')
   }
   const handleClick=()=>{
-    navigate('/menu')
+    navigate('/select')
     
   }
 
@@ -244,7 +244,7 @@ Bodakdev, Ahmedabad
               Law Enforcement
             </Box>
           </Stack>
-
+          <Img width={250} marginTop={20} src="https://forums.mobirise.com/uploads/editor/hn/bjllgl5iba8y.png"/>
           <Stack align={'flex-start'}>
             {/* <ListHeader>Install App</ListHeader> */}
             {/* <AppStoreBadge /> */}
@@ -252,6 +252,7 @@ Bodakdev, Ahmedabad
           </Stack>
         </SimpleGrid>
       </Container>
+      
 
       <Box
         borderTopWidth={1}
@@ -277,7 +278,7 @@ Bodakdev, Ahmedabad
               <FaInstagram /> */}
             {/* </SocialButton> */}
 
-            <Img width={250} src="https://forums.mobirise.com/uploads/editor/hn/bjllgl5iba8y.png"/>
+            
           </Stack>
         </Container>
       </Box>

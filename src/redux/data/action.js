@@ -7,6 +7,10 @@ export const GET_DATA_REQUIEST="GET_DATA_REQUIEST"
 export const GET_DATA_SUCCESS="GET_DATA_SUCCESS"
 export const GET_DATA_FAILURE="GET_DATA_FAILURE"
 
+export const PATCH_DATA_REQUIEST="PATCH_DATA_REQUIEST"
+export const PATCH_DATA_SUCCESS="PATCH_DATA_SUCCESS"
+export const PATCH_DATA_FAILURE="PATCH_DATA_FAILURE"
+
 
 const getDataRequiest=()=>{
     return({
@@ -25,6 +29,23 @@ const getDataFailure=()=>{
     })
 }
 
+const patchDataRequiest=()=>{
+    return({
+        type:PATCH_DATA_REQUIEST
+    })
+}
+const patchDataSuccess=(data)=>{
+    return({
+        type:PATCH_DATA_SUCCESS,
+        payload:data
+    })
+}
+const patchDataFailure=()=>{
+    return({
+        type:PATCH_DATA_FAILURE
+    })
+}
+
 
 export const getData=()=>(dispatch)=>{
     dispatch(getDataRequiest())
@@ -38,5 +59,22 @@ export const getData=()=>(dispatch)=>{
     })
     .catch((error)=>{
         dispatch(getDataFailure)
+    })
+}
+
+
+export const patchData=(data,id)=>(dispatch)=>{
+    dispatch(patchDataRequiest())
+    return axios({
+        url:`http://localhost:8000/data/${id}`,
+        method:"PATCH",
+        data
+    })
+    .then((res)=>{
+        dispatch(patchDataSuccess(res.data))
+        console.log("patchdata",res.data)
+    })
+    .catch((error)=>{
+        dispatch(patchDataFailure)
     })
 }
