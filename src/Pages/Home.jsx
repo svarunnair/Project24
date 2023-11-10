@@ -31,6 +31,7 @@ import {
   
   
   VisuallyHidden,
+  grid,
   
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
@@ -77,8 +78,8 @@ export default function Home() {
   return (
 
 
-    <>
-      <Box bg={('gray.100', 'gray.900')} px={4}>
+    <Grid  >
+      <Box  bg={('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <Box>Logo</Box>
 
@@ -284,26 +285,7 @@ Bodakdev, Ahmedabad
       </Box>
     </Box>
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </>
+    </Grid>
 
   )
 }

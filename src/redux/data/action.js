@@ -11,6 +11,14 @@ export const PATCH_DATA_REQUIEST="PATCH_DATA_REQUIEST"
 export const PATCH_DATA_SUCCESS="PATCH_DATA_SUCCESS"
 export const PATCH_DATA_FAILURE="PATCH_DATA_FAILURE"
 
+export const POST_CART_REQUIEST="POST_CART_REQUIEST"
+export const POST_CART_SUCCESS="POST_CART_SUCCESS"
+export const POST_CART_FAILURE="POST_CART_FAILURE"
+
+export const GET_CART_REQUIEST="GET_CART_REQUIEST"
+export const GET_CART_SUCCESS="GET_CART_SUCCESS"
+export const GET_CART_FAILURE="GET_CART_FAILURE"
+
 
 const getDataRequiest=()=>{
     return({
@@ -46,6 +54,42 @@ const patchDataFailure=()=>{
     })
 }
 
+const postCartRequiest=()=>{
+    return({
+        type:POST_CART_REQUIEST
+    })
+}
+const postCartSuccess=(data)=>{
+    return({
+        type:POST_CART_SUCCESS,
+        payload:data
+    })
+}
+const postCartFailure=()=>{
+    return({
+        type:POST_CART_FAILURE
+    })
+}
+const getCartRequiest=()=>{
+    return({
+        type:GET_CART_REQUIEST
+    })
+}
+const getCartSuccess=(data)=>{
+    return({
+        type:GET_CART_SUCCESS,
+        payload:data
+    })
+}
+const getCartFailure=()=>{
+    return({
+        type:GET_CART_FAILURE
+    })
+}
+
+
+
+
 
 export const getData=()=>(dispatch)=>{
     dispatch(getDataRequiest())
@@ -66,7 +110,7 @@ export const getData=()=>(dispatch)=>{
 export const patchData=(data,id)=>(dispatch)=>{
     dispatch(patchDataRequiest())
     return axios({
-        url:`http://localhost:8000/data/${id}`,
+        url:`http://localhost:8000/cart/${id}`,
         method:"PATCH",
         data
     })
@@ -76,5 +120,37 @@ export const patchData=(data,id)=>(dispatch)=>{
     })
     .catch((error)=>{
         dispatch(patchDataFailure)
+    })
+}
+
+
+export const postCart=(data)=>(dispatch)=>{
+    dispatch(postCartRequiest())
+    return axios({
+        url:'http://localhost:8000/cart',
+        method:"POST",
+        data
+    })
+    .then((res)=>{
+        dispatch(postCartSuccess(res.data))
+        console.log("postCart",res.data)
+    })
+    .catch((error)=>{
+        dispatch(postCartFailure)
+    })
+}
+
+export const getCart=()=>(dispatch)=>{
+    dispatch(getCartRequiest())
+    return axios({
+        url:'http://localhost:8000/cart',
+        method:"GET"
+    })
+    .then((res)=>{
+        dispatch(getCartSuccess(res.data))
+        console.log("getCart",res.data)
+    })
+    .catch((error)=>{
+        dispatch(getCartFailure)
     })
 }

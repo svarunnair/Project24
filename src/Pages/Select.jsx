@@ -46,7 +46,7 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getData, patchData } from '../redux/data/action'
+import { getData, patchData, postCart } from '../redux/data/action'
 
 
 export default function Select() {
@@ -62,25 +62,26 @@ export default function Select() {
     },[])
 
 
-    const addCount=(quant,id)=>{
-        let data={
-            quant:quant+1
-        }
-        dispatch(patchData(data,id))
-    }
-    const reduceCount=(quant,id)=>{
-        if(quant>=2){
-            let data={
-                quant:quant-1
-            }
-            dispatch(patchData(data,id))
-        }else{
-            quant=1
-        }
-        
-       
-    }
+    // const addCount=(quant,id)=>{
+    //     let data={
+    //         quant:quant+1
+    //     }
+    //     dispatch(patchData(data,id))
+    // }
+    // const reduceCount=(quant,id)=>{
+    //     if(quant>=2){
+    //         let data={
+    //             quant:quant-1
+    //         }
+    //         dispatch(patchData(data,id))
+    //     }else{
+    //         quant=1
+    //     }
+    // }
     
+    const handleCart=(item)=>{
+      dispatch(postCart(item))
+    }
 
 
   return (
@@ -91,7 +92,7 @@ export default function Select() {
         <>
         
 
-        <Center py={12}>
+        <Center  py={12}>
       <Box 
         role={'group'}
         p={6}
@@ -130,7 +131,9 @@ export default function Select() {
         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
            {item.item}
           </Heading>
-          <Grid><Button onClick={()=>addCount(item.quant,item.id)}>add</Button>Quantity : {item.quant}<Button onClick={()=>reduceCount(item.quant,item.id)} >reduce</Button></Grid>
+
+          {/* <Grid><Button onClick={()=>addCount(item.quant,item.id)}>add</Button>Quantity : {item.quant}<Button onClick={()=>reduceCount(item.quant,item.id)} >reduce</Button></Grid> */}
+       
         <Stack pt={10} align={'center'}>
           <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
             
@@ -145,7 +148,7 @@ export default function Select() {
             </Text>
           </Stack>
         </Stack>
-        <Button bg={'green'} color={'yellow.200'}>Add to cart</Button>
+        <Button onClick={()=>handleCart(item)} bg={'green'} color={'yellow.200'}>Add to cart</Button>
       </Box>
     </Center>
         

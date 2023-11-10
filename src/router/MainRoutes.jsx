@@ -5,6 +5,7 @@ import Signin from '../Pages/Signin'
 import Home from '../Pages/Home'
 import { Menu } from '@chakra-ui/react'
 import Select from '../Pages/Select'
+import Cart from '../Pages/Cart'
 
 function MainRoutes() {
     let token=localStorage.getItem("token")
@@ -18,6 +19,8 @@ function MainRoutes() {
             <Route path='/home' element={token&&<Home/>}/>
             <Route path='/menu' element={token&&<Menu/>}/>
             <Route path='/select' element={<Select/>}/>
+            {/* <Route path='/payment' element={<Payment/>}/> */}
+            <Route path='/cart' element={<Cart/>}/>
             
         
 
