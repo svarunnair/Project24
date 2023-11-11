@@ -170,6 +170,10 @@ function Cart() {
           navigate('/payment')
         }
 
+        const handleRemove=(id)=>{
+          dispatch(deleteCart(id))
+        }
+
         
     
   return (
@@ -223,7 +227,7 @@ function Cart() {
               </chakra.a>
             </Tooltip> */}
           </Flex>
-
+          <Button onClick={()=>handleRemove(item.id)}>Remove from cart</Button>
           <Flex justifyContent="space-between" alignContent="center">
             {/* <Rating rating={item.rating} numReviews={item.numReviews} /> */}
             <Grid><Button width={10} color={'green.300'} onClick={()=>handleAdd(item.quant,item.id)}>+</Button>Quantity : {item.quant}<Button  width={10} color={'green.300'} onClick={()=>handleReduce(item.quant,item.id)}>-</Button></Grid>
@@ -237,6 +241,7 @@ function Cart() {
         </Box>
       </Box>
     </Flex>
+    
     
     
     
