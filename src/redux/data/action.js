@@ -20,6 +20,19 @@ export const GET_CART_SUCCESS="GET_CART_SUCCESS"
 export const GET_CART_FAILURE="GET_CART_FAILURE"
 
 
+export const POST_PAYMENT_REQUIEST="POST_PAYMENT_REQUIEST"
+export const POST_PAYMENT_SUCCESS="POST_PAYMENT_SUCCESS"
+export const POST_PAYMENT_FAILURE="POST_PAYMENT_FAILURE"
+
+export const GET_PAYMENT_REQUIEST="GET_PAYMENT_REQUIEST"
+export const GET_PAYMENT_SUCCESS="GET_PAYMENT_SUCCESS"
+export const GET_PAYMENT_FAILURE="GET_PAYMENT_FAILURE"
+
+export const DELETE_CART_REQUIEST="DELETE_CART_REQUIEST"
+export const DELETE_CART_SUCCESS="DELETE_CART_SUCCESS"
+export const DELETE_CART_FAILURE="DELETE_CART_FAILURE"
+
+
 const getDataRequiest=()=>{
     return({
         type:GET_DATA_REQUIEST
@@ -86,7 +99,55 @@ const getCartFailure=()=>{
         type:GET_CART_FAILURE
     })
 }
+const postPaymentRequiest=()=>{
+    return({
+        type:POST_PAYMENT_REQUIEST
+    })
+}
+const postPaymentSuccess=(data)=>{
+    return({
+        type:POST_PAYMENT_SUCCESS,
+        payload:data
+    })
+}
+const postPaymentFailure=()=>{
+    return({
+        type:POST_PAYMENT_FAILURE
+    })
+}
 
+const getPaymentRequiest=()=>{
+    return({
+        type:GET_PAYMENT_REQUIEST
+    })
+}
+const getPaymentSuccess=(data)=>{
+    return({
+        type:GET_PAYMENT_SUCCESS,
+        payload:data
+    })
+}
+const getPaymentFailure=()=>{
+    return({
+        type:GET_PAYMENT_FAILURE
+    })
+}
+const deleteCartRequiest=()=>{
+    return({
+        type:DELETE_CART_REQUIEST
+    })
+}
+const deleteCartSuccess=(data)=>{
+    return({
+        type:DELETE_CART_SUCCESS,
+        payload:data
+    })
+}
+const deleteCartFailure=()=>{
+    return({
+        type:DELETE_CART_FAILURE
+    })
+}
 
 
 
@@ -102,7 +163,7 @@ export const getData=()=>(dispatch)=>{
         console.log("getdata",res.data)
     })
     .catch((error)=>{
-        dispatch(getDataFailure)
+        dispatch(getDataFailure())
     })
 }
 
@@ -119,7 +180,7 @@ export const patchData=(data,id)=>(dispatch)=>{
         console.log("patchdata",res.data)
     })
     .catch((error)=>{
-        dispatch(patchDataFailure)
+        dispatch(patchDataFailure())
     })
 }
 
@@ -136,7 +197,7 @@ export const postCart=(data)=>(dispatch)=>{
         console.log("postCart",res.data)
     })
     .catch((error)=>{
-        dispatch(postCartFailure)
+        dispatch(postCartFailure())
     })
 }
 
@@ -151,6 +212,53 @@ export const getCart=()=>(dispatch)=>{
         console.log("getCart",res.data)
     })
     .catch((error)=>{
-        dispatch(getCartFailure)
+        dispatch(getCartFailure())
     })
 }
+
+export const postPayment=(data)=>(dispatch)=>{
+    dispatch(postPaymentRequiest())
+    return axios({
+        url:'http://localhost:8000/payment',
+        method:"POST",
+        data
+    })
+    .then((res)=>{
+        dispatch(postPaymentSuccess(res.data))
+        console.log("postPayment",res.data)
+    })
+    .catch((error)=>{
+        dispatch(postPaymentFailure())
+    })
+}
+
+export const getPayment=()=>(dispatch)=>{
+    dispatch(getPaymentRequiest())
+    return axios({
+        url:'http://localhost:8000/payment',
+        method:"GET"
+    })
+    .then((res)=>{
+        dispatch(getPaymentSuccess(res.data))
+        console.log("getPayment",res.data)
+    })
+    .catch((error)=>{
+        dispatch(getPaymentFailure())
+    })
+}
+
+export const deleteCart=(id)=>(dispatch)=>{
+    
+    dispatch(deleteCartRequiest())
+    return axios({
+        url:`http://localhost:8000/cart/${id}`,
+        method:"DELETE"
+    })
+    .then((res)=>{
+        dispatch(deleteCartSuccess(res.data))
+        console.log("deleteCart",res.data)
+    })
+    .catch((error)=>{
+        dispatch(deleteCartFailure())
+    })
+}   

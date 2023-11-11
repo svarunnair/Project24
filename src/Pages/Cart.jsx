@@ -57,7 +57,8 @@ import { useEffect, useState } from 'react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCart, patchData } from '../redux/data/action'
+import { deleteCart, getCart, patchData, postPayment } from '../redux/data/action'
+import { useNavigate } from 'react-router-dom'
 
 const data = {
   isNew: true,
@@ -103,6 +104,7 @@ function Cart() {
         const cartData=useSelector((store)=>store.data.getCart)
         const dispatch=useDispatch()
         const [totalAmount,setTotalAmount]=useState(0)
+        const navigate=useNavigate()
     
         console.log("cartData",cartData)
     
@@ -150,11 +152,30 @@ function Cart() {
          
         }
 
+        const handleOrder=()=>{
+          cartData?.map((item)=>(
+            dispatch(postPayment(item))
+          ))
+        }
 
+        useEffect(()=>{
+         cartData?.map((item)=>(
+          
+          dispatch(deleteCart(item.id))
+          
+         ))
+        },[postPayment])
+
+        const handlePaymentNavigate=()=>{
+          navigate('/payment')
+        }
+
+        
     
   return (
 
 <>
+<Button marginLeft={1100} onClick={handlePaymentNavigate}>Payment</Button>
 
 {cartData.map((item)=>(
     <Grid  >
@@ -230,7 +251,7 @@ function Cart() {
 <Input onChange={handleCoupon} marginBottom={50} width={200} placeholder='Enter coupon...'/>
 <Box marginBottom={10} fontSize={25} fontWeight={12}>Total amount : Rs {totalAmount} /-</Box>
 
-<Button width={300} bg={'green'} marginBottom={10}>Place order</Button>
+<Button onClick={handleOrder} width={300} bg={'green'} marginBottom={10}>Place order</Button>
     
 
 

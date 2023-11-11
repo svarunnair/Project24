@@ -47,6 +47,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, patchData, postCart } from '../redux/data/action'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Select() {
@@ -54,6 +55,7 @@ export default function Select() {
     const mainData=useSelector((store)=>store.data.data)
     const dispatch=useDispatch()
     const [count,setCount]=useState(1)
+    const navigate =useNavigate()
 
     console.log("mainData",mainData)
 
@@ -83,11 +85,16 @@ export default function Select() {
       dispatch(postCart(item))
     }
 
+    const handleCartNavigate=()=>{
+      navigate('/cart')
+    }
+
 
   return (
 
 
     <>
+    <Button marginLeft={1100} onClick={handleCartNavigate}>Cart</Button>
     {mainData.map((item)=>(
         <>
         
