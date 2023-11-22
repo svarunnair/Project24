@@ -66,14 +66,12 @@ export default function Home() {
 
   const handleLogout=()=>{
     localStorage.removeItem('token')
-    navigate('/signin')
+    navigate('/welcome')
   }
   const handleClick=()=>{
     navigate('/select')
     
   }
-
-  
 
 
 
@@ -84,7 +82,7 @@ export default function Home() {
       
       <Box  bg={('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>Logo</Box>
+          <Box></Box>
 
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
@@ -127,7 +125,7 @@ export default function Home() {
           </Flex>
         </Flex>
       </Box>
-<Img marginLeft={500}  width={300} src="https://b.zmtcdn.com/web_assets/8313a97515fcb0447d2d77c276532a511583262271.png"/>
+<Img marginLeft={350}  width={300} src="https://b.zmtcdn.com/web_assets/8313a97515fcb0447d2d77c276532a511583262271.png"/>
       
 
 <Text marginTop={5} color={'grey'}>Select a resturant</Text>

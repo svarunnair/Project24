@@ -50,12 +50,18 @@ import { getData, patchData, postCart } from '../redux/data/action'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function Select() {
+
+
+
+export default function List() {
 
     const mainData=useSelector((store)=>store.data.data)
     const dispatch=useDispatch()
     const [count,setCount]=useState(1)
     const navigate =useNavigate()
+    
+
+  
 
     console.log("mainData",mainData)
 
@@ -64,23 +70,6 @@ export default function Select() {
     },[])
 
 
-    // const addCount=(quant,id)=>{
-    //     let data={
-    //         quant:quant+1
-    //     }
-    //     dispatch(patchData(data,id))
-    // }
-    // const reduceCount=(quant,id)=>{
-    //     if(quant>=2){
-    //         let data={
-    //             quant:quant-1
-    //         }
-    //         dispatch(patchData(data,id))
-    //     }else{
-    //         quant=1
-    //     }
-    // }
-    
     const handleCart=(item)=>{
       dispatch(postCart(item))
     }
@@ -88,8 +77,6 @@ export default function Select() {
     const handleCartNavigate=()=>{
       navigate('/cart')
     }
-
-
   return (
 
 

@@ -60,6 +60,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteCart, getCart, patchData, postPayment } from '../redux/data/action'
 import { useNavigate } from 'react-router-dom'
 
+import { v4 as uuidv4 } from 'uuid';
+
+
 const data = {
   isNew: true,
   imageURL:
@@ -101,10 +104,13 @@ function Rating({ rating, numReviews } ) {
 
 function Cart() {
 
+  const [coupon,setCoupon] =useState(false)
         const cartData=useSelector((store)=>store.data.getCart)
         const dispatch=useDispatch()
         const [totalAmount,setTotalAmount]=useState(0)
         const navigate=useNavigate()
+        const [qrimage,setQrimage] =useState("")
+
     
         console.log("cartData",cartData)
     
@@ -112,6 +118,7 @@ function Cart() {
             dispatch(getCart())
         },[])
         
+        const dataId=uuidv4()
 
 
         const handleAdd=(quant,id)=>{
@@ -147,15 +154,29 @@ function Cart() {
         const handleCoupon=(e)=>{
           let value=e.target.value 
           if(value==="COUPON"){ 
+            setCoupon(true)
             setTotalAmount(totalAmount-100)
+
           }
          
         }
+        // item": "Burger",
+      // "price": 120,
+      // "quant": 2,
+      // "image"
 
         const handleOrder=()=>{
-          cartData?.map((item)=>(
-            dispatch(postPayment(item))
-          ))
+          // cartData?.map((item)=>(
+          //   dispatch(postPayment(item))
+          // ))
+          let data={
+            item:cartData.map((item)=>{return item.item}),
+            price:cartData.map((item)=>{return item.price}),
+            quant:cartData.map((item)=>{return item.quant}),
+            image:cartData.map((item)=>{return item.image}),
+            qrImage:dataId
+          }
+          dispatch(postPayment(data))
         }
 
         useEffect(()=>{
@@ -173,6 +194,21 @@ function Cart() {
         const handleRemove=(id)=>{
           dispatch(deleteCart(id))
         }
+
+        // useEffect(()=>{
+
+        //   QRCode.toDataURL(uuidv4)
+        //   .then((url)=>{
+        //     setQrimage(url)
+        //     console.log('url',url)
+        //   })
+        //   .catch((error)=>{
+        //     console.error(error)
+        //   })
+      
+        // },[])
+
+      
 
         
     
@@ -253,7 +289,7 @@ function Cart() {
 ))}
 <Text fontSize={12}>If you have coupen enter her</Text>
 
-<Input onChange={handleCoupon} marginBottom={50} width={200} placeholder='Enter coupon...'/>
+<Input onChange={handleCoupon} disabled={coupon}  marginBottom={50} width={200} placeholder='Enter coupon...'/>
 <Box marginBottom={10} fontSize={25} fontWeight={12}>Total amount : Rs {totalAmount} /-</Box>
 
 <Button onClick={handleOrder} width={300} bg={'green'} marginBottom={10}>Place order</Button>
