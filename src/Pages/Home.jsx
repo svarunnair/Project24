@@ -36,6 +36,7 @@ import {
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 
 
@@ -62,6 +63,7 @@ export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate=useNavigate()
+  const [hover,setHover]=useState("90%")
 
 
   const handleLogout=()=>{
@@ -73,7 +75,12 @@ export default function Home() {
     
   }
 
-
+  const handleCheck=()=>{
+    setHover("100%")
+  }
+  const handleLeave=()=>{
+    setHover("90%")
+  }
 
   return (
 
@@ -161,7 +168,18 @@ export default function Home() {
               isTruncated>
               
             </Box>
-            <Grid><Img  onClick={handleClick} rounded={20} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrjjjBNZGZQpZiD77flzTo9ln1ok_2Z2u2uw&usqp=CAU'/></Grid>
+
+            <Grid  >
+        <Img 
+       onMouseEnter={handleCheck}
+       onMouseLeave={handleLeave}
+       height={hover}
+       transition={".5s"}
+       onClick={handleClick}
+       cursor={'pointer'}
+            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrjjjBNZGZQpZiD77flzTo9ln1ok_2Z2u2uw&usqp=CAU'/>
+            </Grid>
+
             <Tooltip
               label="Add to cart"
               bg="white"

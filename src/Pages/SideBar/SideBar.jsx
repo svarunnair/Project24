@@ -59,7 +59,7 @@ const LinkItems  = [
   { name: 'Home', icon: FiHome },
   { name: 'Cart', icon: FiTrendingUp },
   { name: 'Payment', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
+  { name: 'Food list', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
 ]
 
@@ -76,6 +76,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
         }
         if(name==="Payment"){
             navigate('/payment')
+        }
+        if(name==="Food list"){
+          navigate('/select')
         }
     }
 

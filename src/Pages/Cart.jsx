@@ -110,6 +110,8 @@ function Cart() {
         const [totalAmount,setTotalAmount]=useState(0)
         const navigate=useNavigate()
         // const [qrimage,setQrimage] =useState("")
+        // const [over,setOver]=useState('90%')
+
 
     
         console.log("cartData",cartData)
@@ -166,9 +168,7 @@ function Cart() {
       // "image"
 
         const handleOrder=()=>{
-          // cartData?.map((item)=>(
-          //   dispatch(postPayment(item))
-          // ))
+         
           let data={
             item:cartData.map((item)=>{return item.item}),
             price:cartData.map((item)=>{return item.price}),
@@ -208,6 +208,13 @@ function Cart() {
       
         // },[])
 
+        // const handleEnter=()=>{
+        //   setOver("100%")
+        // }
+        // const handleLeave=()=>{
+        //   setOver("90%")
+        // }
+
       
 
         
@@ -232,7 +239,8 @@ function Cart() {
           <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />
         )}
 
-        <Image src={item.image} alt={`Picture of ${item.name}`} roundedTop="lg" />
+        <Image src={item.image} 
+         cursor={'pointer'} />
         <Text color='grey'>{item.item}</Text>
 
         <Box p="6">

@@ -59,7 +59,14 @@ export default function List() {
     const dispatch=useDispatch()
     const [count,setCount]=useState(1)
     const navigate =useNavigate()
-    
+    const [hover,setHover]=useState("90%")
+
+    const handleOver=()=>{
+      setHover("100%")
+    }
+    const handleLeave=()=>{
+      setHover("90%")
+    }
 
   
 
@@ -119,7 +126,9 @@ export default function List() {
               filter: 'blur(20px)',
             },
           }}>
-            <Img borderRadius={15} src={item.image}/>
+            <Img onMouseOver={()=>handleOver(item.id)} onMouseLeave={()=>handleLeave(item.id)} 
+           
+             cursor={'pointer'} borderRadius={15} src={item.image}/>
           
         </Box>
         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
@@ -142,7 +151,8 @@ export default function List() {
             </Text>
           </Stack>
         </Stack>
-        <Button onClick={()=>handleCart(item)} bg={'green'} color={'yellow.200'}>Add to cart</Button>
+        <Button  
+            onClick={()=>handleCart(item)} bg={'green'} color={'yellow.200'}>Add to cart</Button>
       </Box>
     </Center>
         

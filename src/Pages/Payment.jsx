@@ -18,7 +18,7 @@ useEffect(()=>{
 
       {payment?.map((item)=>(
         <>
-        {item.iten}
+        {item.item}
 
    
 
