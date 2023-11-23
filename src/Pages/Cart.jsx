@@ -109,7 +109,7 @@ function Cart() {
         const dispatch=useDispatch()
         const [totalAmount,setTotalAmount]=useState(0)
         const navigate=useNavigate()
-        const [qrimage,setQrimage] =useState("")
+        // const [qrimage,setQrimage] =useState("")
 
     
         console.log("cartData",cartData)

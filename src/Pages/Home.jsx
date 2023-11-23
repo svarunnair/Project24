@@ -161,7 +161,7 @@ export default function Home() {
               isTruncated>
               
             </Box>
-            <Grid><Img onClick={handleClick} rounded={20} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrjjjBNZGZQpZiD77flzTo9ln1ok_2Z2u2uw&usqp=CAU'/></Grid>
+            <Grid><Img  onClick={handleClick} rounded={20} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrjjjBNZGZQpZiD77flzTo9ln1ok_2Z2u2uw&usqp=CAU'/></Grid>
             <Tooltip
               label="Add to cart"
               bg="white"
