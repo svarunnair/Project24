@@ -64,6 +64,7 @@ import {
 import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPayment } from '../redux/data/action'
+import QRCode from 'react-qr-code'
 
 export default function Payment() {
 
@@ -100,7 +101,7 @@ useEffect(()=>{
         boxShadow={('6px 6px 0 black', '6px 6px 0 cyan')}>
         <Box h={'200px'} borderBottom={'1px'} borderColor="black">
           <Img
-            src={item.qrImage}
+            src={item.image}
             roundedTop={'sm'}
             objectFit="cover"
             h="full"
@@ -108,6 +109,13 @@ useEffect(()=>{
             alt={'Blog Image'}
           />
         </Box>
+        <QRCode
+    size={256}
+    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+    value={item.qrImage}
+    viewBox={`0 0 256 256`}
+  />
+
       
         <Box p={4}>
           <Box bg="black" display={'inline-block'} px={2} py={1} color="white" mb={2}>
