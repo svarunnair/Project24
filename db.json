@@ -71,6 +71,31 @@
       "id": 10
     }
   ],
-  "cart": [],
-  "payment": []
+  "cart": [
+    {
+      "item": "Burger",
+      "price": 120,
+      "quant": 2,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi1Mi-DAItDQBF0aQ6-T8j6sv79aY6VUA-ew&usqp=CAU",
+      "id": 1
+    }
+  ],
+  "payment": [
+    {
+      "item": [
+        "Burger"
+      ],
+      "price": [
+        120
+      ],
+      "quant": [
+        2
+      ],
+      "image": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi1Mi-DAItDQBF0aQ6-T8j6sv79aY6VUA-ew&usqp=CAU"
+      ],
+      "qrImage": "4e91d0c6-6a8c-4136-a804-b414d104c0ac",
+      "id": 1
+    }
+  ]
 }
