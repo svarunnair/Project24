@@ -78,6 +78,7 @@ export default function List() {
 
 
     const handleCart=(item)=>{
+      item.paymentDone = false
       dispatch(postCart(item))
     }
 

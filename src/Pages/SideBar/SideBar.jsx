@@ -82,6 +82,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         }
     }
 
+    
 
   return (
     <Box
@@ -156,6 +157,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
     const handleCart=()=>{
         navigate('/cart')
     }
+    const handleLogout=()=>{
+      localStorage.clear()
+      navigate('/welcome')
+    }
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -217,7 +223,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem onClick={handleCart}>Cart</MenuItem>
               <MenuItem onClick={handlePayment}>Payment Page</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={handleLogout}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

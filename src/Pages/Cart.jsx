@@ -57,7 +57,7 @@ import { useEffect, useState } from 'react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCart, getCart, patchData, postPayment } from '../redux/data/action'
+import { deleteAll, deleteCart, getCart, patchData, postPayment,getPayment } from '../redux/data/action'
 import { useNavigate } from 'react-router-dom'
 
 import { v4 as uuidv4 } from 'uuid';
@@ -105,20 +105,27 @@ function Rating({ rating, numReviews } ) {
 function Cart() {
 
   const [coupon,setCoupon] =useState(false)
+  const payment=useSelector((store)=>store.data.getPayment)
         const cartData=useSelector((store)=>store.data.getCart)
         const dispatch=useDispatch()
         const [totalAmount,setTotalAmount]=useState(0)
         const navigate=useNavigate()
         // const [qrimage,setQrimage] =useState("")
         // const [over,setOver]=useState('90%')
+        const paymentResponce=useSelector((store)=>store.data.postPayment)
 
-
+        // let filteredData = cartData.filter(item => !payment.id.includes(item.id));
     
-        console.log("cartData",cartData)
+        // console.log("filteredData",filteredData)
     
         useEffect(()=>{
             dispatch(getCart())
         },[])
+
+        useEffect(()=>{
+          dispatch(getPayment())
+        },[])
+        
         
         const dataId=uuidv4()
 
@@ -162,11 +169,7 @@ function Cart() {
           }
          
         }
-        // item": "Burger",
-      // "price": 120,
-      // "quant": 2,
-      // "image"
-
+       
         const handleOrder=()=>{
          
           let data={
@@ -174,18 +177,14 @@ function Cart() {
             price:cartData.map((item)=>{return item.price}),
             quant:cartData.map((item)=>{return item.quant}),
             image:cartData.map((item)=>{return item.image}),
-            qrImage:dataId
+            id:cartData.map((item)=>{return item.id}),
+            qrImage:dataId,
+            paymentDone:true
           }
-          dispatch(postPayment(data))
+          dispatch(postPayment(data))    
         }
 
-        useEffect(()=>{
-         cartData?.map((item)=>(
-          
-          dispatch(deleteCart(item.id))
-          
-         ))
-        },[postPayment])
+       
 
         const handlePaymentNavigate=()=>{
           navigate('/payment')
@@ -195,29 +194,6 @@ function Cart() {
           dispatch(deleteCart(id))
         }
 
-        // useEffect(()=>{
-
-        //   QRCode.toDataURL(uuidv4)
-        //   .then((url)=>{
-        //     setQrimage(url)
-        //     console.log('url',url)
-        //   })
-        //   .catch((error)=>{
-        //     console.error(error)
-        //   })
-      
-        // },[])
-
-        // const handleEnter=()=>{
-        //   setOver("100%")
-        // }
-        // const handleLeave=()=>{
-        //   setOver("90%")
-        // }
-
-      
-
-        
     
   return (
 
