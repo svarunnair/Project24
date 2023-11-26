@@ -113,6 +113,7 @@ function Cart() {
         // const [qrimage,setQrimage] =useState("")
         // const [over,setOver]=useState('90%')
         const paymentResponce=useSelector((store)=>store.data.postPayment)
+        console.log("resPayment",paymentResponce)
 
         // let filteredData = cartData.filter(item => !payment.id.includes(item.id));
     
@@ -181,8 +182,15 @@ function Cart() {
             qrImage:dataId,
             paymentDone:true
           }
-          dispatch(postPayment(data))    
+          dispatch(postPayment(data))
+         
         }
+
+        if(paymentResponce===cartData){
+          cartData.map((item)=>(
+            dispatch(deleteAll(item))
+          ))
+        }    
 
        
 
@@ -193,6 +201,8 @@ function Cart() {
         const handleRemove=(id)=>{
           dispatch(deleteCart(id))
         }
+
+       
 
     
   return (
