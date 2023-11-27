@@ -37,7 +37,7 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import PrivateRoutes from '../../router/PrivateRoutes'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -154,7 +154,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
  
     const navigate=useNavigate()
     const mainData=useSelector((store)=>store.data.data)
-    const [search,setSearch]=useState('')
+    const [search,setSearch]=useState([])
 
 
     const handleSelect=()=>{
@@ -174,15 +174,13 @@ const MobileNav = ({ onOpen, ...rest }) => {
     const handleSearch=(e)=>{
       let value=e.target.value 
       setSearch(value)
+
+      let params = new URL(value.location).searchParams;
+    
     }
     
 
-    const handleSerchButton=()=>{
-      let sortData=mainData.filter((item)=>{
-        return item.item===search
-      })
-      setSearch(sortData)
-    }
+   
 
 
 
@@ -213,8 +211,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontWeight="bold">
         Logo
       </Text>
-      {/* <Input fontFamily={'serif'} onChange={handleSearch} placeholder='Search your tast' />
-      <Button onClick={handleSerchButton}>Search</Button> */}
+      <Input fontFamily={'serif'} onChange={handleSearch} placeholder='Search your tast' />
+     
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />

@@ -61,7 +61,7 @@ export default function List() {
     // const [count,setCount]=useState(1)
     const navigate =useNavigate()
     const [hover,setHover]=useState("90%")
-    const [search,setSearch]=useState(mainData)
+    const [search,setSearch]=useState([])
 
     const handleOver=()=>{
       setHover("100%")
@@ -90,18 +90,17 @@ export default function List() {
 
     const handleSearch=(e)=>{
       let value=e.target.value 
-      setSearch(value)
+    
+      const sortData = mainData.filter(item => item.item.toLowerCase().includes(value.toLowerCase()));
+    
+      setSearch(sortData)
     }
-    const handleSearchButton=()=>{
-      let sortData=mainData.filter((item)=>{
-        return item.item===search
-      })
-      setSearch([...sortData])
-    }
+    let params = new URL(document.location).searchParams;
+    let name = params.get("name")
 
 
     useEffect(()=>{
-      setSearch(search)
+      setSearch(mainData)
     },[mainData])
 
     const handleBurger=()=>{
@@ -135,9 +134,9 @@ export default function List() {
 
 
     <>
-    <Button marginLeft={1100} onClick={handleCartNavigate}>Cart</Button>
+    {/* <Button marginLeft={1100} onClick={handleCartNavigate}>Cart</Button> */}
     <Input onChange={handleSearch} placeholder='search food'/>
-    <Button fontFamily={'serif'} onClick={handleSearchButton}>Search</Button>
+    {/* <Button fontFamily={'serif'} onClick={handleSearchButton}>Search</Button> */}
     <Button fontFamily={'serif'} onClick={handleBurger}>Burger</Button>
     <Button  fontFamily={'serif'} onClick={handleSortHtoL}>Sort H to L</Button>
     <Button fontFamily={'serif'} onClick={handleLtoH}>Sort L to H</Button>

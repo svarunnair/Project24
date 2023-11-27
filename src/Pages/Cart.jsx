@@ -208,7 +208,7 @@ function Cart() {
   return (
 
 <>
-<Button marginLeft={1100} onClick={handlePaymentNavigate}>Payment</Button>
+
 
 {cartData.map((item)=>(
     <Grid  >
