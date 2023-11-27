@@ -22,6 +22,8 @@ import {
   MenuItem,
   MenuList,
   Img,
+  Input,
+  Button,
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -36,6 +38,8 @@ import {
 import { IconType } from 'react-icons'
 import PrivateRoutes from '../../router/PrivateRoutes'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // interface LinkItemProps {
 //   name: string
@@ -147,7 +151,12 @@ const NavItem = ({ icon, children, ...rest }) => {
 }
 
 const MobileNav = ({ onOpen, ...rest }) => {
+ 
     const navigate=useNavigate()
+    const mainData=useSelector((store)=>store.data.data)
+    const [search,setSearch]=useState('')
+
+
     const handleSelect=()=>{
         navigate('/select')
       }
@@ -161,6 +170,22 @@ const MobileNav = ({ onOpen, ...rest }) => {
       localStorage.clear()
       navigate('/welcome')
     }
+
+    const handleSearch=(e)=>{
+      let value=e.target.value 
+      setSearch(value)
+    }
+    
+
+    const handleSerchButton=()=>{
+      let sortData=mainData.filter((item)=>{
+        return item.item===search
+      })
+      setSearch(sortData)
+    }
+
+
+
 
   return (
     <Flex
@@ -188,6 +213,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontWeight="bold">
         Logo
       </Text>
+      {/* <Input fontFamily={'serif'} onChange={handleSearch} placeholder='Search your tast' />
+      <Button onClick={handleSerchButton}>Search</Button> */}
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
@@ -201,6 +228,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                     'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                   }
                 />
+              
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"

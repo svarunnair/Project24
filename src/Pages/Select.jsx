@@ -43,6 +43,7 @@ import {
   Img,
   Button,
   Grid,
+  Input,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -57,9 +58,10 @@ export default function List() {
 
     const mainData=useSelector((store)=>store.data.data)
     const dispatch=useDispatch()
-    const [count,setCount]=useState(1)
+    // const [count,setCount]=useState(1)
     const navigate =useNavigate()
     const [hover,setHover]=useState("90%")
+    const [search,setSearch]=useState(mainData)
 
     const handleOver=()=>{
       setHover("100%")
@@ -85,12 +87,62 @@ export default function List() {
     const handleCartNavigate=()=>{
       navigate('/cart')
     }
+
+    const handleSearch=(e)=>{
+      let value=e.target.value 
+      setSearch(value)
+    }
+    const handleSearchButton=()=>{
+      let sortData=mainData.filter((item)=>{
+        return item.item===search
+      })
+      setSearch([...sortData])
+    }
+
+
+    useEffect(()=>{
+      setSearch(search)
+    },[mainData])
+
+    const handleBurger=()=>{
+     let sortBurger=mainData.filter((item)=>{
+        return item.item==="Burger"
+      })
+      setSearch(sortBurger)
+    }
+
+    // useEffect(()=>{
+    //   setSearch(mainData)
+    // },[])
+
+
+    const handleSortHtoL=()=>{
+      let sortData=mainData.sort((a,b)=>{
+        return (b.price-a.price) 
+      })
+      setSearch(sortData)
+    }
+
+    const handleLtoH=()=>{
+      let sortData=mainData.sort((a,b)=>{
+        return (a.price-b.price)
+
+      })
+      setSearch(sortData)
+    }
+
   return (
 
 
     <>
     <Button marginLeft={1100} onClick={handleCartNavigate}>Cart</Button>
-    {mainData.map((item)=>(
+    <Input onChange={handleSearch} placeholder='search food'/>
+    <Button fontFamily={'serif'} onClick={handleSearchButton}>Search</Button>
+    <Button fontFamily={'serif'} onClick={handleBurger}>Burger</Button>
+    <Button  fontFamily={'serif'} onClick={handleSortHtoL}>Sort H to L</Button>
+    <Button fontFamily={'serif'} onClick={handleLtoH}>Sort L to H</Button>
+
+    {search.map((item)=>(
         <>
         
 
