@@ -37,7 +37,7 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import PrivateRoutes from '../../router/PrivateRoutes'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -155,6 +155,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
     const navigate=useNavigate()
     const mainData=useSelector((store)=>store.data.data)
     const [search,setSearch]=useState([])
+    // const [searchParams,setSearchParams]=useSearchParams()
 
 
     const handleSelect=()=>{
@@ -173,10 +174,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
     const handleSearch=(e)=>{
       let value=e.target.value 
-      setSearch(value)
-
-      let params = new URL(value.location).searchParams;
-    
+      
+        navigate(`/select/${value}`);
+        // setSearchParams(value)
+       
     }
     
 

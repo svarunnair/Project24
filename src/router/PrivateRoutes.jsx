@@ -20,7 +20,9 @@ function PrivateRoutes() {
             <Route path='/cart' element={token||email?<Cart/>:<>please signup</>}/>
             <Route path='/menu' element={token||email?<Menu/>:<>please signup</>}/>
             <Route path='/payment' element={token||email?<Payment/>:<>please signup</>}/>
+            <Route path='/select/:value' element={token||email?<List/>:<>please signup</>}/>
             <Route path='/select' element={token||email?<List/>:<>please signup</>}/>
+
 
 
         </Routes>

@@ -48,7 +48,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, patchData, postCart } from '../redux/data/action'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 
@@ -62,6 +62,9 @@ export default function List() {
     const navigate =useNavigate()
     const [hover,setHover]=useState("90%")
     const [search,setSearch]=useState([])
+    const params = useParams()
+
+    console.log("paramss",params)
 
     const handleOver=()=>{
       setHover("100%")
@@ -70,8 +73,18 @@ export default function List() {
       setHover("90%")
     }
 
-  
+    // let params = new URL(document.location).searchParams;
+    // let name = params.get("name"); // is the string "Jonathan Smith".
+    // let age = parseInt(params.get("age")); // is the number 18
+    
 
+    // const paramsData=searchParams.get(value)
+
+    // const dataParams=new URLSearchParams()
+    // // dataParams.set('data',value)
+    // const url="http://localhost:8000/data"
+
+    
     console.log("mainData",mainData)
 
     useEffect(()=>{
@@ -88,15 +101,21 @@ export default function List() {
       navigate('/cart')
     }
 
+    
+
     const handleSearch=(e)=>{
       let value=e.target.value 
+      // let paramsData=params.value
+      
     
       const sortData = mainData.filter(item => item.item.toLowerCase().includes(value.toLowerCase()));
-    
+    // const sortData=mainData.filter((item)=>{return item.item.toLowerCase()===value.toLowerCase()})
       setSearch(sortData)
+     
+
+      
     }
-    let params = new URL(document.location).searchParams;
-    let name = params.get("name")
+    // let params = new URL(document.location).searchParams;
 
 
     useEffect(()=>{
@@ -109,10 +128,6 @@ export default function List() {
       })
       setSearch(sortBurger)
     }
-
-    // useEffect(()=>{
-    //   setSearch(mainData)
-    // },[])
 
 
     const handleSortHtoL=()=>{
@@ -134,9 +149,8 @@ export default function List() {
 
 
     <>
-    {/* <Button marginLeft={1100} onClick={handleCartNavigate}>Cart</Button> */}
+   
     <Input onChange={handleSearch} placeholder='search food'/>
-    {/* <Button fontFamily={'serif'} onClick={handleSearchButton}>Search</Button> */}
     <Button fontFamily={'serif'} onClick={handleBurger}>Burger</Button>
     <Button  fontFamily={'serif'} onClick={handleSortHtoL}>Sort H to L</Button>
     <Button fontFamily={'serif'} onClick={handleLtoH}>Sort L to H</Button>
@@ -209,9 +223,6 @@ export default function List() {
     </Center>
         
         
-
-
-
 
 
 
