@@ -37,8 +37,8 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import PrivateRoutes from '../../router/PrivateRoutes'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 // interface LinkItemProps {
@@ -111,6 +111,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </NavItem>
       
       ))}
+
+
+
+<NavItem  >
+       <Text onClick={()=>navigate('/select')}>select</Text> 
+
+        </NavItem>
     </Box>
   )
 }
@@ -153,9 +160,13 @@ const NavItem = ({ icon, children, ...rest }) => {
 const MobileNav = ({ onOpen, ...rest }) => {
  
     const navigate=useNavigate()
-    const mainData=useSelector((store)=>store.data.data)
-    const [search,setSearch]=useState([])
-    // const [searchParams,setSearchParams]=useSearchParams()
+    // const mainData=useSelector((store)=>store.data.data)
+    // const [search,setSearch]=useState([])
+    const [searchParams,setSearchParams]=useState('')
+    const path=useLocation()
+
+    console.log("path",path)
+    
 
 
     const handleSelect=()=>{
@@ -171,20 +182,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
       localStorage.clear()
       navigate('/welcome')
     }
-
+    // let mValue;
     const handleSearch=(e)=>{
-      let value=e.target.value 
+     let value=e.target.value 
       
         navigate(`/select/${value}`);
-        // setSearchParams(value)
-       
+        setSearchParams(value)
+  
     }
-    
-
-   
-
-
-
 
   return (
     <Flex
@@ -212,8 +217,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontWeight="bold">
         Logo
       </Text>
-      <Input fontFamily={'serif'} onChange={handleSearch} placeholder='Search your tast' />
-     
+      {path.pathname===`/select/${searchParams}`&&<Input fontFamily={'serif'} onChange={handleSearch} placeholder='Search your tast' />}
+    
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />

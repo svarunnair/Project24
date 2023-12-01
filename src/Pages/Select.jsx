@@ -48,7 +48,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, patchData, postCart } from '../redux/data/action'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 
 
@@ -64,7 +64,10 @@ export default function List() {
     const [search,setSearch]=useState([])
     const params = useParams()
 
-    console.log("paramss",params)
+    const path=useLocation()
+
+    console.log("path",path.pathname)
+    console.log("paramss ccccccccccccccccccc",params.value)
 
     const handleOver=()=>{
       setHover("100%")
@@ -73,17 +76,7 @@ export default function List() {
       setHover("90%")
     }
 
-    // let params = new URL(document.location).searchParams;
-    // let name = params.get("name"); // is the string "Jonathan Smith".
-    // let age = parseInt(params.get("age")); // is the number 18
     
-
-    // const paramsData=searchParams.get(value)
-
-    // const dataParams=new URLSearchParams()
-    // // dataParams.set('data',value)
-    // const url="http://localhost:8000/data"
-
     
     console.log("mainData",mainData)
 
@@ -104,18 +97,22 @@ export default function List() {
     
 
     const handleSearch=(e)=>{
-      let value=e.target.value 
+    let value= e.target.value 
       // let paramsData=params.value
-      
-    
-      const sortData = mainData.filter(item => item.item.toLowerCase().includes(value.toLowerCase()));
-    // const sortData=mainData.filter((item)=>{return item.item.toLowerCase()===value.toLowerCase()})
-      setSearch(sortData)
-     
-
-      
+      console.log("params.value",params.value)   
+      const searchData=mainData.filter(item=>item.item.toLowerCase().includes(value))
+      setSearch(searchData)
     }
     // let params = new URL(document.location).searchParams;
+
+
+useEffect(()=>{
+  const sortData = mainData.filter(item => item.item.toLowerCase().includes(params.value));
+
+      setSearch(sortData)
+},[params])
+
+
 
 
     useEffect(()=>{

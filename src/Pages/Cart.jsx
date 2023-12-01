@@ -183,6 +183,7 @@ function Cart() {
             paymentDone:true
           }
           dispatch(postPayment(data))
+          console.log("data",data)
          
         }
 
